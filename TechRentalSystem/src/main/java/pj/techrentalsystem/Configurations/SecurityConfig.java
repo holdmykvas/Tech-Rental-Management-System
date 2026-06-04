@@ -23,8 +23,29 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
-        http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
-        http.formLogin(login -> login.loginPage("/login").permitAll());
+
+        http.authorizeHttpRequests(auth -> {
+
+            auth.requestMatchers("/register", "/login", "/css/**", "/images/**").permitAll();
+
+            auth.requestMatchers("/admin/**").hasAuthority("ADMIN");
+
+            auth.anyRequest().authenticated();
+        });
+        http.formLogin(login -> login
+                .loginPage("/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/equipment",true)
+                .permitAll()
+        );
+
+        http.logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+        );
+
         return http.build();
     }
 }
