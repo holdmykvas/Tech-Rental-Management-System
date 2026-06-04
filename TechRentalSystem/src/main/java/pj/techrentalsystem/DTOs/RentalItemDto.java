@@ -9,14 +9,45 @@ import java.math.BigDecimal;
 
 public class RentalItemDto {
 
-    @Min(0)
-    int quantity;
-    @Min(0)
-    BigDecimal subTotalPrice;
+    private Long id;
 
-    @ManyToOne
-    Rental rental;
+    @Min(0)
+    private int quantity;
+    @Min(0)
+    private BigDecimal subTotalPrice;
 
-    @ManyToOne
-    Equipment equipment;
+    private Long rentalId;
+    private Long equipmentId;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getSubTotalPrice() {
+        return subTotalPrice;
+    }
+
+    public void setSubTotalPrice(BigDecimal subTotalPrice) {
+        this.subTotalPrice = subTotalPrice;
+    }
+
+    public Long getRentalId() {
+        return rentalId;
+    }
+
+    public void setRentalId(Long rentalId) {
+        this.rentalId = rentalId;
+    }
+
+    public Long getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(Long equipmentId) {
+        this.equipmentId = equipmentId;
+    }
 }

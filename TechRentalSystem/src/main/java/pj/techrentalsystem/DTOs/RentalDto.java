@@ -12,16 +12,64 @@ import java.util.List;
 
 public class RentalDto {
 
-    LocalDate startDate;
-    LocalDate endDate;
+    private Long id;
 
-    BigDecimal totalPrice;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    Status status;
+    private BigDecimal totalPrice;
 
-    @OneToMany
-    List<RentalItem> rentalItemList;
+    private Status status;
 
-    @ManyToOne
-    User user;
+    private List<RentalItemDto> rentalItemList;
+
+    private Long userId;
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public List<RentalItemDto> getRentalItemList() {
+        return rentalItemList;
+    }
+
+    public void setRentalItemList(List<RentalItemDto> rentalItemList) {
+        this.rentalItemList = rentalItemList;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

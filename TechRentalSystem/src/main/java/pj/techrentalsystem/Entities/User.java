@@ -22,7 +22,7 @@ public class User {
 
     Role role;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     List<Rental> rentalList;
 
     //GETTERS AND SETTERS

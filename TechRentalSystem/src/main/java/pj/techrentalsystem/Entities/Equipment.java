@@ -20,7 +20,7 @@ public class Equipment {
     int stockQuantity;
     Category category;
 
-    @OneToMany
+    @OneToMany (mappedBy = "equipment")
     List<RentalItem> rentalItemList;
 
     //GETTERS AND SETTERS

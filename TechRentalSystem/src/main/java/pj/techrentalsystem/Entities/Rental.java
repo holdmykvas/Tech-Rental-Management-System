@@ -20,7 +20,7 @@ public class Rental {
 
     Status status;
 
-    @OneToMany
+    @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL, orphanRemoval = true)
     List<RentalItem> rentalItemList;
 
     @ManyToOne
