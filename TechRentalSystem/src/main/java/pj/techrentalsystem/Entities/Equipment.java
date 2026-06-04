@@ -1,13 +1,13 @@
 package pj.techrentalsystem.Entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import pj.techrentalsystem.Enums.Category;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
+@Table(name = "Equipment")
 public class Equipment {
 
     @Id
