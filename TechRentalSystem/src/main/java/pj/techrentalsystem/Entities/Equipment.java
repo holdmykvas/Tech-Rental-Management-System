@@ -2,7 +2,6 @@ package pj.techrentalsystem.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import pj.techrentalsystem.Enums.Category;
 
 import java.math.BigDecimal;
@@ -17,9 +16,7 @@ public class Equipment {
 
     String name;
     String description;
-    @Min(0)
     BigDecimal price;
-    @Min(0)
     int stockQuantity;
     Category category;
 
