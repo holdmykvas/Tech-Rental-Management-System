@@ -20,6 +20,9 @@ public class Equipment {
     int stockQuantity;
     Category category;
 
+    @Version
+    long version;
+
     @OneToMany (mappedBy = "equipment")
     List<RentalItem> rentalItemList;
 
