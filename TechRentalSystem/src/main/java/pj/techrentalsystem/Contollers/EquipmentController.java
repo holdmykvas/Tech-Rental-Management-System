@@ -9,7 +9,6 @@ import pj.techrentalsystem.Services.EquipmentService;
 
 
 @Controller
-@RequestMapping("equipment")
 public class EquipmentController {
 
     private final EquipmentService equipmentService;
@@ -19,13 +18,13 @@ public class EquipmentController {
     }
 
     //USER, ADMIN
-    @GetMapping("/")
-    public String getAllEquipment(Model model) {
-        model.addAttribute("equipmentDto",equipmentService.getAllEquipment());
+    @GetMapping("/equipment")
+    public String displayCatalog(Model model) {
+        model.addAttribute("equipment",equipmentService.getAllEquipment());
         return "equipment";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/equipment/{id}")
     public String getEquipmentById(@PathVariable Long id, Model model){
         model.addAttribute("equipmentDto", equipmentService.getEquipmentById(id));
         return "equipment-details";
@@ -33,17 +32,17 @@ public class EquipmentController {
 
     //ADMIN TODO
 
-    @PostMapping("/admin")
+    @PostMapping("/equipment/admin")
     public String addEquipment(@RequestBody EquipmentDto equipmentDto , BindingResult bindingResult, Model model) {
         return "equipment-add";
     }
 
-    @PutMapping("/admin/{id}")
+    @PutMapping("/equipment/admin/{id}")
     public String updateEquipment(@PathVariable Long id, @RequestBody EquipmentDto equipmentDto, BindingResult bindingResult, Model model) {
         return "equipment-update";
     }
 
-    @DeleteMapping("/admin/{id}")
+    @DeleteMapping("/equipment/admin/{id}")
     public String deleteEquipment(@PathVariable Long id) {
         return "redirect/:";
     }

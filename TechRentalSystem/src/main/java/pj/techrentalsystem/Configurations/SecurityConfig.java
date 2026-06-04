@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/equipment",true)
+                .failureUrl("/test/login?error=true")
                 .permitAll()
         );
 

@@ -1,8 +1,10 @@
 package pj.techrentalsystem.Services;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pj.techrentalsystem.DTOs.UserDto;
 import pj.techrentalsystem.Entities.User;
+import pj.techrentalsystem.Enums.Role;
 import pj.techrentalsystem.Repositories.UserRepository;
 
 
@@ -12,9 +14,12 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> getAllUsers() {
@@ -23,7 +28,13 @@ public class UserService {
 
     public User addUser(UserDto userDto) {
         User user = new User();
-        //TODO
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRole(Role.USER);
+
         return userRepository.save(user);
     }
 
