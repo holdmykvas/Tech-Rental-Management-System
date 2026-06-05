@@ -32,18 +32,5 @@ public class EquipmentController {
 
     //ADMIN TODO
 
-    @PostMapping("/equipment/admin")
-    public String addEquipment(@RequestBody EquipmentDto equipmentDto , BindingResult bindingResult, Model model) {
-        return "equipment-add";
-    }
 
-    @PutMapping("/equipment/admin/{id}")
-    public String updateEquipment(@PathVariable Long id, @RequestBody EquipmentDto equipmentDto, BindingResult bindingResult, Model model) {
-        return "equipment-update";
-    }
-
-    @DeleteMapping("/equipment/admin/{id}")
-    public String deleteEquipment(@PathVariable Long id) {
-        return "redirect/:";
-    }
 }

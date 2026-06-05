@@ -35,6 +35,19 @@ public class EquipmentService {
         return equipmentRepository.save(equipment);
     }
 
+    public EquipmentDto getEquipmentDtoById(Long id) {
+        Equipment equipment = getEquipmentById(id);
+
+        EquipmentDto dto = new EquipmentDto();
+        dto.setName(equipment.getName());
+        dto.setDescription(equipment.getDescription());
+        dto.setPrice(equipment.getPrice());
+        dto.setStockQuantity(equipment.getStockQuantity());
+        dto.setCategory(equipment.getCategory());
+
+        return dto;
+    }
+
     public Equipment updateEquipment(Long id,EquipmentDto equipmentDto){
         Equipment equipment = equipmentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Equipment with id: " + id + " not found!"));
 
