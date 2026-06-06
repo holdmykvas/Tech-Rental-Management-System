@@ -30,7 +30,4 @@ public class EquipmentController {
         return "equipment-details";
     }
 
-    //ADMIN TODO
-
-
 }

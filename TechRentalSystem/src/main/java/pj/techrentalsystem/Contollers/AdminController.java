@@ -17,12 +17,14 @@ public class AdminController {
         this.equipmentService = equipmentService;
     }
 
+    // Dashboard
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
         model.addAttribute("equipments", equipmentService.getAllEquipment());
         return "admin-dashboard";
     }
 
+    // ADD
     @GetMapping("/equipment/add")
     public String showAddForm(Model model){
         model.addAttribute("equipmentDto", new EquipmentDto());
@@ -35,6 +37,7 @@ public class AdminController {
         return "redirect:/admin/dashboard?success";
     }
 
+    //UPDATE
     @GetMapping("equipment/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model){
         EquipmentDto equipmentDto = equipmentService.getEquipmentDtoById(id);
@@ -51,7 +54,8 @@ public class AdminController {
         return "redirect:/admin/dashboard?updated";
     }
 
-    @DeleteMapping("/equipment/admin/{id}")
+    //DELETE
+    @DeleteMapping("/equipment/{id}")
     public String deleteEquipment(@PathVariable Long id) {
         equipmentService.deleteEquipment(id);
         return "redirect/:admin/dashboard?deleted";

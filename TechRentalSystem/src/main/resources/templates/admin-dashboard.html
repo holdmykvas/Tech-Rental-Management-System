@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+  <nav style="background-color: darkred; color: white; padding: 10px">
+    <a th:href="@{/admin/dashboard}" style="color: white; margin-right: 15px;">Manage Inventory</a>
+    <a th:href="@{/admin/rentals}" style="color: white; margin-right: 15px;">Global Rentals</a>
+    <a th:href="@{/equipment}" style="color: white; margin-right: 30px;">Catalog</a>
+    <a th:href="@{/my-rentals}" style="color:white; margin-right: 45px;">My Rentals</a>
+    <a th:href="@{/cart}" style="color:white; margin-right: 60px;">Cart</a>
+    <a th:href="@{/logout}" style="color: white; float: right;">Log out</a>
+  </nav>
+
+  <h2>Master Inventory Control</h2>
+
+  <p th:if="${param.success}" style="color: green;">Equipment added successfully!</p>
+  <p th:if="${param.deleted}" style="color: red;">Equipment removed from catalog!</p>
+  <p th:if="${param.updated}" style="color: blue;">Equipment updated!</p>
+
+  <div style="margin-bottom: 20px;">
+    <a th:href="@{equipment/add}"><button> Add new equipment</button></a>
+  </div>
+
+  <table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Stock</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${equipments}">
+      <td th:text="${item.id}">1</td>
+      <td th:text="${item.name}">Item Name</td>
+      <td th:text="${item.category}">CATEGORY</td>
+      <td th:text="${item.stockQuantity}">0</td>
+      <td>
+        <form th:action="@{/admin/equipment/{id}(id=${item.id})}" method="POST" style="display:inline;">
+          <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;">[Edit]</button>
+        </form>
+        <form th:action="@{/admin/equipment/{id}(id=${item.id})}" method="DELETE" style="display:inline;">
+          <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;">[Delete]</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+</html>

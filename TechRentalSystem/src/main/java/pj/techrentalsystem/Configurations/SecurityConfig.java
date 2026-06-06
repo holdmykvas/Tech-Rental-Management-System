@@ -24,9 +24,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
 
+        http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
+
         http.authorizeHttpRequests(auth -> {
 
-            auth.requestMatchers("/register", "/login", "/css/**", "/images/**").permitAll();
+            auth.requestMatchers("/register", "/login", "/css/**", "/images/**", "/h2-console/**").permitAll();
 
             auth.requestMatchers("/admin/**").hasAuthority("ADMIN");
 
@@ -36,8 +38,8 @@ public class SecurityConfig {
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/equipment",true)
-                .failureUrl("/test/login?error=true")
+                .defaultSuccessUrl("/admin/dashboard",true)
+                .failureUrl("/login?error=true")
                 .permitAll()
         );
 
