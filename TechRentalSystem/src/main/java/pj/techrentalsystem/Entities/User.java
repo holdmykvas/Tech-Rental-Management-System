@@ -7,7 +7,7 @@ import pj.techrentalsystem.Enums.Role;
 import java.util.List;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 public class User {
 
     @Id
