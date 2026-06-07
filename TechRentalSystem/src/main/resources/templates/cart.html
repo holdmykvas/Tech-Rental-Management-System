@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Cart - Tech Rental</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0;">
+
+<nav style="background-color: #333; color: white; padding: 10px;">
+    <span style="font-weight: bold; margin-right: 20px;">Tech Rental System</span>
+    <a th:href="@{/equipment}" style="color: white; margin-right: 15px;">Catalog</a>
+    <a th:href="@{/cart}" style="color: white; margin-right: 15px;">My Cart</a>
+    <a th:href="@{/login}" style="color: white; float: right;">Log out</a>
+</nav>
+
+<div style="padding: 20px; max-width: 800px; margin: 0 auto; background: white; margin-top: 20px; border-radius: 8px;">
+    <h2>Your Pending Rental</h2>
+
+    <div th:if="${cart.isEmpty()}">
+        <p>Your cart is currently empty. <a th:href="@{/equipment}">Browse the catalog</a>.</p>
+    </div>
+
+    <div th:unless="${cart.isEmpty()}">
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left; margin-bottom: 20px;">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Daily Rate</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${cart.items}">
+                <td th:text="${entry.value.equipmentDto.name}">Item Name</td>
+                <td>$<span th:text="${entry.value.equipmentDto.price}">0.00</span></td>
+                <td th:text="${entry.value.quantity}">1</td>
+                <td>
+                    <form th:action="@{/cart/remove}" method="POST" style="margin: 0;">
+                        <input type="hidden" name="equipmentId" th:value="${entry.key}" />
+                        <button type="submit" style="background: none; border: none; color: red; text-decoration: underline; cursor: pointer;">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form th:action="@{/rentals/checkout}" method="POST" style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
+            <h3>Finalize Reservation</h3>
+            <div style="margin-bottom: 10px;">
+                <label>Start Date:</label>
+                <input type="date" name="startDate" required>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label>End Date:</label>
+                <input type="date" name="endDate" required>
+            </div>
+            <button type="submit" style="background-color: blue; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+                Confirm Reservation
+            </button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

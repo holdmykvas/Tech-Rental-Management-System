@@ -15,16 +15,25 @@
 <h2>Available Equipment</h2>
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-    <div th:each="item : ${equipments}" style="border: 1px solid #ccc; padding: 15px; width: 250px; border-radius: 8px;">
+    <div th:each="item : ${equipment}" style="border: 1px solid #ccc; padding: 15px; width: 250px; border-radius: 8px;">
         <h3 th:text="${item.name}" style="margin-top: 0;">Device Name</h3>
         <p><strong>Category:</strong> <span th:text="${item.category}">Category</span></p>
         <p th:text="${item.description}">Description goes here...</p>
         <p><strong>Price:</strong> $<span th:text="${item.price}">0.00</span> / day</p>
         <p><strong>In Stock:</strong> <span th:text="${item.stockQuantity}">0</span></p>
 
-        <button style="background-color: green; color: white; border: none; padding: 10px; cursor: pointer; width: 100%;">
-            Add to Cart
-        </button>
+        <form th:action="@{/cart/add}" method="POST" style="margin-top: 10px;">
+            <input type="hidden" name="equipmentId" th:value="${item.id}" />
+
+            <div style="margin-bottom: 10px;">
+                <label for="quantity">Qty:</label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" th:max="${item.stockQuantity}" style="width: 60px;">
+            </div>
+
+            <button type="submit" style="background-color: green; color: white; border: none; padding: 10px; cursor: pointer; width: 100%;">
+                Add to Cart
+            </button>
+        </form>
     </div>
 </div>
 

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "Equipment")
+@Table(name = "equipment")
 public class Equipment {
 
     @Id
@@ -18,6 +18,7 @@ public class Equipment {
     String description;
     BigDecimal price;
     int stockQuantity;
+    @Enumerated(EnumType.STRING)
     Category category;
 
     @Version

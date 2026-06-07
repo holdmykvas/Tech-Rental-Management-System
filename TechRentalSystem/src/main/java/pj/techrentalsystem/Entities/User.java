@@ -1,7 +1,6 @@
 package pj.techrentalsystem.Entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import pj.techrentalsystem.Enums.Role;
 
 import java.util.List;
