@@ -8,10 +8,12 @@ import pj.techrentalsystem.Entities.Rental;
 import pj.techrentalsystem.Entities.RentalItem;
 import pj.techrentalsystem.Entities.User;
 import pj.techrentalsystem.Enums.Status;
+import pj.techrentalsystem.Repositories.EquipmentRepository;
 import pj.techrentalsystem.Repositories.RentalRepository;
 import pj.techrentalsystem.Repositories.UserRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
@@ -21,11 +23,13 @@ public class RentalService {
     private final RentalRepository rentalRepository;
     private final HelperService helperService;
     private final UserRepository userRepository;
+    private final EquipmentRepository equipmentRepository;
 
-    public RentalService(RentalRepository rentalRepository, HelperService helperService, UserRepository userRepository) {
+    public RentalService(RentalRepository rentalRepository, HelperService helperService, UserRepository userRepository, EquipmentRepository equipmentRepository) {
         this.rentalRepository = rentalRepository;
         this.helperService = helperService;
         this.userRepository = userRepository;
+        this.equipmentRepository = equipmentRepository;
     }
 
     public List<Rental> getAllRentals() {
@@ -42,8 +46,12 @@ public class RentalService {
         return rentalRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Rental with this id { " + id + " } is not found!"));
     }
 
+    public List<Rental> getRentalsByUserId(Long userId) {
+        return rentalRepository.findByUserId(userId);
+    }
+
     @Transactional
-    public Rental processCheckout(Long userId, LocalDate start, LocalDate end, Map<Equipment, Integer> equipmentQuanity) {
+    public Rental processCheckout(Long userId, LocalDate start, LocalDate end, Map<Long, Integer> equipmentQuantity) {
         if (helperService.validateDateChronology(start,end)) throw new IllegalArgumentException("End date cannot be earlier that start date!");
 
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found!"));
@@ -54,12 +62,16 @@ public class RentalService {
         rental.setEndDate(end);
         rental.setStatus(Status.ACTIVE);
 
-        for(Map.Entry<Equipment,Integer> entry : equipmentQuanity.entrySet()) {
-            Equipment equipment = entry.getKey();
+        if (rental.getRentalItemList() == null) {
+            rental.setRentalItemList(new ArrayList<>());
+        }
+
+        for(Map.Entry<Long,Integer> entry : equipmentQuantity.entrySet()) {
+            Equipment equipment = equipmentRepository.findById(entry.getKey()).orElseThrow(() -> new IllegalArgumentException("Equipment with this id { " + entry.getKey() + " } is not found!"));
             Integer requestedQuantity = entry.getValue();
 
             if (!helperService.checkStockAvailability(equipment, requestedQuantity)) {
-                throw new IllegalArgumentException("Not enought stock for: " + equipment.getName());
+                throw new IllegalArgumentException("Not enough stock for: " + equipment.getName());
             }
 
             equipment.setStockQuantity(equipment.getStockQuantity() - requestedQuantity);

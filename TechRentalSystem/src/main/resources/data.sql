@@ -1,10 +1,10 @@
 -- Admin User
 INSERT INTO users (email, first_name, last_name, password, role)
-VALUES ('s32876_admin@test.com', 'Nikita', 'Admin', '$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HCGzGzodR1G8b1F4J1Z6y', 1);
+VALUES ('admin@test.com', 'Nikita', 'Admin', '$2a$12$U/4pUtL2rBwmRgEho8eOY.dynHf.QjXW/uevTkgGWDomnjDWDg1Vm', 1);
 
 -- Standard User
 INSERT INTO users (email, first_name, last_name, password, role)
-VALUES ('nikita_user@test.com', 'Nikita', 'User', '$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HCGzGzodR1G8b1F4J1Z6y', 0);
+VALUES ('user@test.com', 'Nikita', 'User', '$2a$12$U/4pUtL2rBwmRgEho8eOY.dynHf.QjXW/uevTkgGWDomnjDWDg1Vm', 0);
 
 
 -- ---------------------------------------------------------
@@ -18,7 +18,4 @@ INSERT INTO equipment (name, category, description, price, stock_quantity, versi
 VALUES ('Canon EOS R5', 'CAMERA', 'Professional mirrorless camera perfect for media production.', 85.00, 4, 0);
 
 INSERT INTO equipment (name, category, description, price, stock_quantity, version)
-VALUES ('Cisco Catalyst 9300', 'ROUTER', 'Enterprise-grade switch for networking simulations.', 25.00, 8, 0);
-
-INSERT INTO equipment (name, category, description, price, stock_quantity, version)
-VALUES ('Dell UltraSharp 27', 'MONITOR', '4K USB-C Hub Monitor for dual-screen setups.', 15.00, 20, 0);
+VALUES ('Cisco Catalyst 9300', 'ACCESSORY', 'Enterprise-grade switch for networking simulations.', 25.00, 8, 0);
