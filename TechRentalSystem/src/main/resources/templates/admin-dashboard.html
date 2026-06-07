@@ -21,7 +21,7 @@
   <p th:if="${param.updated}" style="color: blue;">Equipment updated!</p>
 
   <div style="margin-bottom: 20px;">
-    <a th:href="@{equipment/add}"><button> Add new equipment</button></a>
+    <a th:href="@{/admin/equipment/add}"><button> Add new equipment</button></a>
   </div>
 
   <table border="1" cellpadding="10" cellspacing="0">
@@ -44,7 +44,8 @@
         <form th:action="@{/admin/equipment/{id}(id=${item.id})}" method="POST" style="display:inline;">
           <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;">[Edit]</button>
         </form>
-        <form th:action="@{/admin/equipment/{id}(id=${item.id})}" method="DELETE" style="display:inline;">
+        <form th:action="@{/admin/equipment/{id}(id=${item.id})}" method="POST" style="display:inline;">
+          <input type="hidden" name ="_method" value = delete"/>
           <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;">[Delete]</button>
         </form>
       </td>

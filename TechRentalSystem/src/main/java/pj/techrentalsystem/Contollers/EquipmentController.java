@@ -20,14 +20,13 @@ public class EquipmentController {
     //USER, ADMIN
     @GetMapping("/equipment")
     public String displayCatalog(Model model) {
-        model.addAttribute("equipment",equipmentService.getAllEquipment());
+        model.addAttribute("equipment",equipmentService.getAllEquipmentDto());
         return "equipment";
     }
 
     @GetMapping("/equipment/{id}")
     public String getEquipmentById(@PathVariable Long id, Model model){
-        model.addAttribute("equipmentDto", equipmentService.getEquipmentById(id));
+        model.addAttribute("equipmentDto", equipmentService.getEquipmentDtoById(id));
         return "equipment-details";
     }
-
 }

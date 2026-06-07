@@ -20,7 +20,7 @@ public class AdminController {
     // Dashboard
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
-        model.addAttribute("equipments", equipmentService.getAllEquipment());
+        model.addAttribute("equipments", equipmentService.getAllEquipmentDto());
         return "admin-dashboard";
     }
 
@@ -38,7 +38,7 @@ public class AdminController {
     }
 
     //UPDATE
-    @GetMapping("equipment/edit/{id}")
+    @GetMapping("/equipment/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model){
         EquipmentDto equipmentDto = equipmentService.getEquipmentDtoById(id);
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Error - Tech Rental System</title>
+</head>
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+
+<div style="text-align: center; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-top: 5px solid darkred;">
+  <h1 style="color: darkred; margin-top: 0;">Oops! Something went wrong.</h1>
+
+  <p style="font-size: 18px; color: grey; margin: 20px 0;" th:text="${errorMessage}">
+    Default error message fallback.
+  </p>
+
+  <a th:href="@{/equipment}">
+    <button style="background-color: grey; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 4px;">
+      Return to Catalog
+    </button>
+  </a>
+</div>
+
+</body>
+</html>

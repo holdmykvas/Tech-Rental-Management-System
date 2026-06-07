@@ -2,6 +2,7 @@ package pj.techrentalsystem;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -9,13 +10,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
-        return new ResponseEntity<>("Error: " + ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public String handleIllegalArgumentException(IllegalArgumentException ex, Model model) {
+        model.addAttribute("errorMessage", ex.getMessage());
+        return "error";
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGeneralException(Exception ex) {
-        return new ResponseEntity<>("Error occured: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public String handleGeneralException(Exception ex, Model model) {
+        model.addAttribute("errorMessage", "An unexpected system error occured: " + ex.getMessage());
+        return "error";
     }
 }
 
